@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.github.svenmeier.wicket-dnd</groupId>
         <artifactId>wicket-dnd-parent</artifactId>
-        <version>0.7.3.ottobuild</version>
+        <version>0.7.4.ottobuild</version>
     </parent>
 
     <artifactId>wicket-dnd-examples</artifactId>
