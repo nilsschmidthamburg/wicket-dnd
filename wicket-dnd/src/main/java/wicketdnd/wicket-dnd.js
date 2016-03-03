@@ -1,4 +1,5 @@
-;(function (undefined) {
+;
+(function (undefined) {
 
     "use strict";
 
@@ -264,8 +265,8 @@
                         } while (candidate);
 
                         if (location != wicketdnd.locationNone && !location.id) {
-                            Wicket.Log.error(
-                                    'wicket-dnd: drop ' + location.anchor + ' matched selector but does not have markup id');
+                            Wicket.Log.error('wicket-dnd: drop ' + location.anchor +
+                                    ' matched selector but does not have markup id');
                             location = wicketdnd.locationNone;
                         }
 
@@ -284,9 +285,7 @@
                         Wicket.Ajax.ajax(attrs);
                     }
                 });
-
                 function findLocation(position, candidate, location, scopeId) {
-
                     if (location == wicketdnd.locationNone && $(candidate).is(selectors.center)) {
                         location = {
                             'id': candidate.id,
@@ -320,7 +319,7 @@
                     }
 
                     if ($(candidate).is(selectors.top) && (position.top <= offset.top + topMargin) &&
-                            (!forceSibling || $(candidate).siblings('#' + scopeId).lenght > 0)) {
+                            (!forceSibling || $(candidate).siblings('#' + scopeId).length > 0)) {
                         var _div = $('<div>').addClass('dnd-drop-top');
                         location = {
                             'id': candidate.id,
@@ -339,7 +338,7 @@
                             }
                         };
                     } else if ($(candidate).is(selectors.bottom) && (position.top >= offset.top + height - bottomMargin) &&
-                            (!forceSibling || $(candidate).siblings('#' + scopeId).lenght > 0)) {
+                            (!forceSibling || $(candidate).siblings('#' + scopeId).length > 0)) {
                         var _div = $('<div>').addClass('dnd-drop-bottom');
                         location = {
                             'id': candidate.id,
@@ -358,7 +357,7 @@
                             }
                         };
                     } else if ($(candidate).is(selectors.left) && (position.left <= offset.left + leftMargin) &&
-                            (!forceSibling || $(candidate).siblings('#' + scopeId).lenght > 0)) {
+                            (!forceSibling || $(candidate).siblings('#' + scopeId).length > 0)) {
                         var _div = $('<div>').addClass('dnd-drop-left');
                         location = {
                             'id': candidate.id,
@@ -377,7 +376,7 @@
                             }
                         };
                     } else if ($(candidate).is(selectors.right) && (position.left >= offset.left + width - rightMargin) &&
-                            (!forceSibling || $(candidate).siblings('#' + scopeId).lenght > 0)) {
+                            (!forceSibling || $(candidate).siblings('#' + scopeId).length > 0)) {
                         var _div = $('<div>').addClass('dnd-drop-right');
                         location = {
                             'id': candidate.id,
@@ -417,7 +416,7 @@
                                 target = value;
                                 // stop loop
                                 return false;
-                            }
+                    }
                         }
                     });
 
@@ -469,23 +468,23 @@
                             $.inArray(operation, targetOperations) != -1;
                 };
 
-                if (link) {
-                    if (allowed('LINK')) {
-                        return wicketdnd.operation('LINK');
+                    if (link) {
+                        if (allowed('LINK')) {
+                            return wicketdnd.operation('LINK');
+                        }
+                    } else if (copy) {
+                        if (allowed('COPY')) {
+                            return wicketdnd.operation('COPY');
+                        }
+                    } else {
+                        if (allowed('MOVE')) {
+                            return wicketdnd.operation('MOVE');
+                        } else if (allowed('COPY')) {
+                            return wicketdnd.operation('COPY');
+                        } else if (allowed('LINK')) {
+                            return wicketdnd.operation('LINK');
+                        }
                     }
-                } else if (copy) {
-                    if (allowed('COPY')) {
-                        return wicketdnd.operation('COPY');
-                    }
-                } else {
-                    if (allowed('MOVE')) {
-                        return wicketdnd.operation('MOVE');
-                    } else if (allowed('COPY')) {
-                        return wicketdnd.operation('COPY');
-                    } else if (allowed('LINK')) {
-                        return wicketdnd.operation('LINK');
-                    }
-                }
 
                 return wicketdnd.operation('NONE');
             }
